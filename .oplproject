@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+	<version>1.0</version>
+	<configs>
+		<config default="true" name="Configuraci&amp;#243;n 1" category="opl">
+			<ref name="TP1_Modelos.mod" type="model">
+			</ref>
+			<ref name="TP1_Modelos.ops" type="setting">
+			</ref>
+			<ref name="TP1_Modelos.dat" type="data">
+			</ref>
+		</config>
+	</configs>
+	
+</project>
