@@ -1,0 +1,18 @@
+/*********************************************
+ * OPL 12.7.1.0 Data
+ * Author: La catedra
+ * Creation Date: Mar 25, 2019 at 8:44:07 AM
+ *********************************************/
+/*PRODUCTOS:
+1: Nescafe Dolca
+2: Nescafe Clasico
+3: Nescafe Gold Blend 
+*/
+PRODUCTOS = {1, 2, 3}; 
+DISPONIBILIDAD = [ 1, 1, 1 ]; 
+PRECIO_PROMO = [ 90, 105, 110 ]; 
+PRECIO_REGULAR = [ 100, 120, 150 ]; 
+PREFERENCIAS_PROMO = [ 2, 1, 3 ]; 
+PREFERENCIAS_REGULAR = [ 5, 4, 6 ];
+
+/*Output: Producto 2 a precio regular 120*/ 

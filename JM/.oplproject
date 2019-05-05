@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+	<version>1.0</version>
+	<configs>
+		<config default="true" name="Configuracion 01" category="opl">
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/01-TodosDisponibles3productos.dat" type="data">
+			</ref>
+			<ref name="TP1.mod" type="model">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 02" category="opl">
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/02-Producto2NoDisponible3productos.dat" type="data">
+			</ref>
+			<ref name="TP1.mod" type="model">
+			</ref>
+		</config>
+	</configs>
+	
+</project>
