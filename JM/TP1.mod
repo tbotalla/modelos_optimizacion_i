@@ -39,8 +39,8 @@ dvar boolean Y_HAY_PROMO_GENE;
 
 // Indican cual es el producto disponible mas preferido por el usuario, a precio regular 
 dvar boolean Y_PREF_I_ANTES_J[PRODUCTOS][PRODUCTOS];
+dvar boolean Y_PREF_I_ANTES_J_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_I_ANTES_J_RESTO[PRODUCTOS];
-dvar boolean Y_PREF_I_ANTES_J_DISPO[PRODUCTOS];
 
 // Funcional
 maximize
@@ -103,7 +103,25 @@ subject to {
   sum(i in PRODUCTOS) (Y_HAY_PROMO_PROD[i]) >= Y_HAY_PROMO_GENE;
 
   // Condicion de preferencia de producto a precio regular
-  // HACER
+  // Comparacion de todos contra todos, con i distinto a j
+  forall(i in PRODUCTOS) { 
+    forall(j in PRODUCTOS) {
+      if (i != j) {
+        
+        PREFERENCIAS_REGULAR[i] - PREFERENCIAS_REGULAR[j] >= -M * (1 - Y_PREF_I_ANTES_J[i][j]);
+        PREFERENCIAS_REGULAR[i] - PREFERENCIAS_REGULAR[j] <=  M * Y_PREF_I_ANTES_J[i][j];
+        
+        // Disponibilidad
+        Y_PREF_I_ANTES_J_DISPO[i][j] ==  Y_PREF_I_ANTES_J[i][j] * DISPONIBILIDAD[i] * DISPONIBILIDAD[j];
+      }
+    }
+  }
+  // Comparacion de 1 producto contra el resto
+  forall(i in PRODUCTOS) { 
+  
+    sum(j in PRODUCTOS:i!=j) (Y_PREF_I_ANTES_J_DISPO[j][i]) >= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1) * Y_PREF_I_ANTES_J_RESTO[i];
+    sum(j in PRODUCTOS:i!=j) (Y_PREF_I_ANTES_J_DISPO[j][i]) <= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1 - 1) + Y_PREF_I_ANTES_J_RESTO[i];
+  }
 
   // Vinculacion entre las variables de promocion y preferencia y las del funcional
   forall(i in PRODUCTOS) { 
@@ -113,7 +131,7 @@ subject to {
   forall(i in PRODUCTOS) { 
   
     Y_R[i] <= -M * (Y_HAY_PROMO_GENE - 1);
-    //Y_R[i] <= Y_PREF_I_ANTES_J_DISPO[i] - M * (Y_HAY_PROMO_GENE);
+    //Y_R[i] <= Y_PREF_I_ANTES_J_RESTO[i] - M * (Y_HAY_PROMO_GENE);
   }
 
   // El cliente lleva un solo producto
