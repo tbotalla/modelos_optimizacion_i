@@ -132,6 +132,7 @@ subject to {
   
     Y_R[i] <= -M * (Y_HAY_PROMO_GENE - 1);
     Y_R[i] >= Y_PREF_I_ANTES_J_RESTO[i] - M * (Y_HAY_PROMO_GENE);
+    Y_R[i] <= Y_HAY_PROMO_GENE + Y_PREF_I_ANTES_J_RESTO[i];
   }
 
   // El cliente lleva un solo producto
