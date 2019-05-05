@@ -1,6 +1,6 @@
 /*********************************************
  * OPL 12.8.0.0 Model
- * Author: JuanManuelGonzalez
+ * Author: El Grupo
  * Creation Date: 5/5/2019 at 13:09:30
  *********************************************/
 
@@ -131,7 +131,7 @@ subject to {
   forall(i in PRODUCTOS) { 
   
     Y_R[i] <= -M * (Y_HAY_PROMO_GENE - 1);
-    //Y_R[i] <= Y_PREF_I_ANTES_J_RESTO[i] - M * (Y_HAY_PROMO_GENE);
+    Y_R[i] >= Y_PREF_I_ANTES_J_RESTO[i] - M * (Y_HAY_PROMO_GENE);
   }
 
   // El cliente lleva un solo producto

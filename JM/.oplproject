@@ -17,6 +17,70 @@
 			<ref name="TP1.mod" type="model">
 			</ref>
 		</config>
+		<config default="false" name="Configuracion 03" category="opl">
+			<ref name="Archivos dat/03-TodosDisponibles10productos.dat" type="data">
+			</ref>
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 04" category="opl">
+			<ref name="Archivos dat/04-TodosDisponibles10productosCambianPref.dat" type="data">
+			</ref>
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 05" category="opl">
+			<ref name="Archivos dat/05-TodosDisponibles10productosCambianPref.dat" type="data">
+			</ref>
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 06" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/06-TodosDisponibles20productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 07" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/07-TodosDisponibles50productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 08" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/08-AlgunosNoDisponibles50productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 09" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/09-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuracion 10" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos dat/10-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
+			</ref>
+		</config>
 	</configs>
 	
 </project>
