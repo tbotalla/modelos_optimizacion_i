@@ -30,9 +30,12 @@ dvar boolean Y_PREF_P_ANTES_R[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_RESTO[PRODUCTOS];
 // II - El producto en promo genera mas ingresos al super que el resto de los productos disponibles a precio regular
+dvar int PRECIO_PROMO_EN_PROMO[PRODUCTOS];
+dvar int PRECIO_REGULAR_EN_PROMO[PRODUCTOS]; 
 dvar boolean Y_PRECIO_P_ANTES_R[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PRECIO_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PRECIO_P_ANTES_R_RESTO[PRODUCTOS];
+
 // Indican de si se envia una promocion por producto y en general
 dvar boolean Y_HAY_PROMO_PROD[PRODUCTOS];
 dvar boolean Y_HAY_PROMO_GENE;
@@ -52,15 +55,13 @@ subject to {
   // Condicion de promo I
   // Comparacion de todos contra todos, con i distinto a j
   forall(i in PRODUCTOS) { 
-    forall(j in PRODUCTOS) {
-      if (i != j) {
-        
-        PREFERENCIAS_REGULAR[j] - PREFERENCIAS_PROMO[i] >= -M * (1 - Y_PREF_P_ANTES_R[i][j]);
-        PREFERENCIAS_REGULAR[j] - PREFERENCIAS_PROMO[i] <=  M * Y_PREF_P_ANTES_R[i][j];
+    forall(j in PRODUCTOS:i!=j) {
+
+        PREFERENCIAS_REGULAR[i] - PREFERENCIAS_PROMO[j] >= -M * (1 - Y_PREF_P_ANTES_R[i][j]);
+        PREFERENCIAS_REGULAR[i] - PREFERENCIAS_PROMO[j] <=  M * Y_PREF_P_ANTES_R[i][j];
         
         // Disponibilidad
         Y_PREF_P_ANTES_R_DISPO[i][j] ==  Y_PREF_P_ANTES_R[i][j] * DISPONIBILIDAD[i] * DISPONIBILIDAD[j];
-      }
     }
   }
   // Comparacion de 1 producto contra el resto
@@ -71,17 +72,23 @@ subject to {
   }
     
   // Condicion de promo II
-  // Comparacion de todos contra todos, con i distinto a j
+  // Filtro de los precios para comparar solo los que pueden llegar a ser promo
   forall(i in PRODUCTOS) { 
-    forall(j in PRODUCTOS) {
-      if (i != j) {
+
+   PRECIO_PROMO_EN_PROMO[i]   <= M * Y_PREF_P_ANTES_R_RESTO[i];
+   PRECIO_REGULAR_EN_PROMO[i] <= M * Y_PREF_P_ANTES_R_RESTO[i];
+   PRECIO_PROMO_EN_PROMO[i]   <= PRECIO_PROMO [i];
+   PRECIO_REGULAR_EN_PROMO[i] <= PRECIO_REGULAR [i];   
+  } 
+  // Comparacion de todos contra todos, para los que estan en posible promo, con i distinto a j
+  forall(i in PRODUCTOS) { 
+    forall(j in PRODUCTOS:i!=j) {
         
-        PRECIO_PROMO[j] - PRECIO_REGULAR[i] >= -M * (1 - Y_PRECIO_P_ANTES_R[i][j]);
-        PRECIO_PROMO[j] - PRECIO_REGULAR[i] <=  M * Y_PRECIO_P_ANTES_R[i][j];
+        PRECIO_PROMO_EN_PROMO[i] - PRECIO_REGULAR_EN_PROMO[j] >= -M * (1 - Y_PRECIO_P_ANTES_R[i][j]);
+        PRECIO_PROMO_EN_PROMO[i] - PRECIO_REGULAR_EN_PROMO[j] <=  M * Y_PRECIO_P_ANTES_R[i][j];
         
         // Disponibilidad
         Y_PRECIO_P_ANTES_R_DISPO[i][j] ==  Y_PRECIO_P_ANTES_R[i][j] * DISPONIBILIDAD[i] * DISPONIBILIDAD[j];
-      }
     }
   }
   // Comparacion de 1 producto contra el resto
@@ -105,15 +112,13 @@ subject to {
   // Condicion de preferencia de producto a precio regular
   // Comparacion de todos contra todos, con i distinto a j
   forall(i in PRODUCTOS) { 
-    forall(j in PRODUCTOS) {
-      if (i != j) {
+    forall(j in PRODUCTOS:i!=j) {
         
         PREFERENCIAS_REGULAR[i] - PREFERENCIAS_REGULAR[j] >= -M * (1 - Y_PREF_I_ANTES_J[i][j]);
         PREFERENCIAS_REGULAR[i] - PREFERENCIAS_REGULAR[j] <=  M * Y_PREF_I_ANTES_J[i][j];
         
         // Disponibilidad
         Y_PREF_I_ANTES_J_DISPO[i][j] ==  Y_PREF_I_ANTES_J[i][j] * DISPONIBILIDAD[i] * DISPONIBILIDAD[j];
-      }
     }
   }
   // Comparacion de 1 producto contra el resto
