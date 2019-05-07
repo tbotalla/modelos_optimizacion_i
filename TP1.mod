@@ -34,8 +34,8 @@ dvar boolean Y_PREF_P_ANTES_R[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_RESTO[PRODUCTOS];
 // II - El producto en promo genera mas ingresos al super que el resto de los productos disponibles a precio regular
-dvar int PRECIO_PROMO_EN_PROMO[PRODUCTOS];
-dvar int PRECIO_REGULAR_EN_PROMO[PRODUCTOS]; 
+dvar int+ PRECIO_PROMO_EN_PROMO[PRODUCTOS];
+dvar int+ PRECIO_REGULAR_EN_PROMO[PRODUCTOS]; 
 dvar boolean Y_PRECIO_P_ANTES_R[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PRECIO_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PRECIO_P_ANTES_R_RESTO[PRODUCTOS];
@@ -84,8 +84,10 @@ subject to {
 
    PRECIO_PROMO_EN_PROMO[i]   <= M * Y_PREF_P_ANTES_R_RESTO[i];
    PRECIO_REGULAR_EN_PROMO[i] <= M * Y_PREF_P_ANTES_R_RESTO[i];
-   PRECIO_PROMO_EN_PROMO[i]   <= PRECIO_PROMO [i];
-   PRECIO_REGULAR_EN_PROMO[i] <= PRECIO_REGULAR [i];   
+   PRECIO_PROMO_EN_PROMO[i]   <= PRECIO_PROMO[i] + M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
+   PRECIO_REGULAR_EN_PROMO[i] <= PRECIO_REGULAR[i] + M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
+   PRECIO_PROMO_EN_PROMO[i]   >= PRECIO_PROMO[i] - M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
+   PRECIO_REGULAR_EN_PROMO[i] >= PRECIO_REGULAR[i] - M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);   
   } 
   // Comparacion de todos contra todos, para los que estan en posible promo, con i distinto a j
   precio_producto_promo_vs_regular_todos_contra_todos_disponibilidad:
