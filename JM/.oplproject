@@ -4,41 +4,41 @@
 		<config default="true" name="Catedra 01" category="opl">
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/01-TodosDisponibles3productos.dat" type="data">
-			</ref>
 			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="Archivos DAT (Catedra)/01-TodosDisponibles3productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 02" category="opl">
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/02-Producto2NoDisponible3productos.dat" type="data">
-			</ref>
 			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="Archivos DAT (Catedra)/02-Producto2NoDisponible3productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 03" category="opl">
-			<ref name="Archivos dat/03-TodosDisponibles10productos.dat" type="data">
-			</ref>
 			<ref name="TP1.mod" type="model">
 			</ref>
 			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Catedra)/03-TodosDisponibles10productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 04" category="opl">
-			<ref name="Archivos dat/04-TodosDisponibles10productosCambianPref.dat" type="data">
-			</ref>
 			<ref name="TP1.mod" type="model">
 			</ref>
 			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Catedra)/04-TodosDisponibles10productosCambianPref.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 05" category="opl">
-			<ref name="Archivos dat/05-TodosDisponibles10productosCambianPref.dat" type="data">
-			</ref>
 			<ref name="TP1.mod" type="model">
 			</ref>
 			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Catedra)/05-TodosDisponibles10productosCambianPref.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 06" category="opl">
@@ -46,7 +46,7 @@
 			</ref>
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/06-TodosDisponibles20productos.dat" type="data">
+			<ref name="Archivos DAT (Catedra)/06-TodosDisponibles20productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 07" category="opl">
@@ -54,7 +54,7 @@
 			</ref>
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/07-TodosDisponibles50productos.dat" type="data">
+			<ref name="Archivos DAT (Catedra)/07-TodosDisponibles50productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 08" category="opl">
@@ -62,7 +62,7 @@
 			</ref>
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/08-AlgunosNoDisponibles50productos.dat" type="data">
+			<ref name="Archivos DAT (Catedra)/08-AlgunosNoDisponibles50productos.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 09" category="opl">
@@ -70,7 +70,7 @@
 			</ref>
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/09-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
+			<ref name="Archivos DAT (Catedra)/09-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Catedra 10" category="opl">
@@ -78,7 +78,87 @@
 			</ref>
 			<ref name="TP1.ops" type="setting">
 			</ref>
-			<ref name="Archivos dat/10-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
+			<ref name="Archivos DAT (Catedra)/10-AlgunosNoDisponibles50productosCambianPref.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 01 (50 Productos)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/01-50productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 03 (100 Productos)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/03-100productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 05 (200 Productos)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/05-200productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 09 (1000 Productos)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/09-1000productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 07 (500 Productos)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/07-500productos.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 02 (50 Productos Variante)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/02-50productosVariante.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 04 (100 Productos Variante)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/04-100productosVariante.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 06 (200 Productos Variante)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/06-200productosVariante.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 08 (500 Productos Variante)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/08-500productosVariante.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Grupo 10 (1000 Productos Variante)" category="opl">
+			<ref name="TP1.mod" type="model">
+			</ref>
+			<ref name="TP1.ops" type="setting">
+			</ref>
+			<ref name="Archivos DAT (Grupo)/10-1000productosVariante.dat" type="data">
 			</ref>
 		</config>
 	</configs>
