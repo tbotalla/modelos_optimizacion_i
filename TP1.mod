@@ -33,12 +33,16 @@ dvar boolean Y_R[PRODUCTOS]; // 1: el usuario lleva el producto i a precio regul
 dvar boolean Y_PREF_P_ANTES_R[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
 dvar boolean Y_PREF_P_ANTES_R_RESTO[PRODUCTOS];
+
 // II - El producto en promo genera mas ingresos al super que el resto de los productos disponibles a precio regular
+dvar int+ PREF_PREFERIDO_REGULAR[PRODUCTOS];
+dvar int+ PRECIO_PREFERIDO_REGULAR[PRODUCTOS];
+dvar int+ PREF_PROMO_EN_PROMO[PRODUCTOS];
 dvar int+ PRECIO_PROMO_EN_PROMO[PRODUCTOS];
-dvar int+ PRECIO_REGULAR_EN_PROMO[PRODUCTOS]; 
-dvar boolean Y_PRECIO_P_ANTES_R[PRODUCTOS][PRODUCTOS];
-dvar boolean Y_PRECIO_P_ANTES_R_DISPO[PRODUCTOS][PRODUCTOS];
-dvar boolean Y_PRECIO_P_ANTES_R_RESTO[PRODUCTOS];
+dvar int+ VALOR_PRECIO_PREFERIDO_REGULAR;
+dvar int+ VALOR_PREF_PREFERIDO_REGULAR;
+dvar boolean Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[PRODUCTOS];
+dvar boolean Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[PRODUCTOS];
 
 // Indican si se envia una promocion por producto y en general
 dvar boolean Y_HAY_PROMO_PROD[PRODUCTOS];
@@ -78,43 +82,42 @@ subject to {
   }
     
   // Condiciones de promo II
-  // Filtro de los precios para comparar solo los que pueden llegar a ser promo
-  precio_promo_y_regular_posibles_productos_en_promo:
-  forall(i in PRODUCTOS) { 
+  // Determinacion de los datos sobre los que se calculara la condicion, vinculacion con la condicion I
+  datos_condicion_ii:
+  forall(i in PRODUCTOS) {
 
-   PRECIO_PROMO_EN_PROMO[i]   <= M * Y_PREF_P_ANTES_R_RESTO[i];
-   PRECIO_REGULAR_EN_PROMO[i] <= M * Y_PREF_P_ANTES_R_RESTO[i];
-   PRECIO_PROMO_EN_PROMO[i]   <= PRECIO_PROMO[i] + M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
-   PRECIO_REGULAR_EN_PROMO[i] <= PRECIO_REGULAR[i] + M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
-   PRECIO_PROMO_EN_PROMO[i]   >= PRECIO_PROMO[i] - M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
-   PRECIO_REGULAR_EN_PROMO[i] >= PRECIO_REGULAR[i] - M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);   
-  } 
-  // Comparacion de todos contra todos, para los que estan en posible promo, con i distinto a j
-  precio_producto_promo_vs_regular_todos_contra_todos_disponibilidad:
-  forall(i in PRODUCTOS) { 
-    forall(j in PRODUCTOS:i!=j) {
-        
-        PRECIO_PROMO_EN_PROMO[i] - PRECIO_REGULAR_EN_PROMO[j] >= -M * (1 - Y_PRECIO_P_ANTES_R[i][j]);
-        PRECIO_PROMO_EN_PROMO[i] - PRECIO_REGULAR_EN_PROMO[j] <=  M * Y_PRECIO_P_ANTES_R[i][j];
-        
-        // Disponibilidad
-        Y_PRECIO_P_ANTES_R_DISPO[i][j] ==  Y_PRECIO_P_ANTES_R[i][j] * DISPONIBILIDAD[i] * DISPONIBILIDAD[j];
-    }
-  }
-  // Comparacion de un producto contra el resto
-  precio_producto_promo_vs_regular_uno_contra_el_resto:  
-  forall(i in PRODUCTOS) { 
-  
-    sum(j in PRODUCTOS:i!=j) (Y_PRECIO_P_ANTES_R_DISPO[j][i]) >= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1) * Y_PRECIO_P_ANTES_R_RESTO[i];
-    sum(j in PRODUCTOS:i!=j) (Y_PRECIO_P_ANTES_R_DISPO[j][i]) <= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1 - 1) + Y_PRECIO_P_ANTES_R_RESTO[i];
-  }
+    PREF_PREFERIDO_REGULAR[i] == Y_PREF_I_ANTES_J_RESTO[i] * PREFERENCIAS_REGULAR[i];  
+    PRECIO_PREFERIDO_REGULAR[i] == Y_PREF_I_ANTES_J_RESTO[i] * PRECIO_REGULAR[i];
 
-  // AND de I y II para determinar si hay promocion o no, por producto
+    PREF_PROMO_EN_PROMO[i] <= M + M * Y_PREF_P_ANTES_R_RESTO[i];
+    PREF_PROMO_EN_PROMO[i] >= M - M * Y_PREF_P_ANTES_R_RESTO[i];
+    PREF_PROMO_EN_PROMO[i] <= PREFERENCIAS_PROMO[i] + M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
+    PREF_PROMO_EN_PROMO[i] >= PREFERENCIAS_PROMO[i] - M * (1 - Y_PREF_P_ANTES_R_RESTO[i]);
+
+    PRECIO_PROMO_EN_PROMO[i] == Y_PREF_P_ANTES_R_RESTO[i] * PRECIO_PROMO[i];
+  }
+  // Preferencia del producto preferido a precio regular
+  valor_pref_producto_regular:
+  VALOR_PREF_PREFERIDO_REGULAR == sum(i in PRODUCTOS) (PREF_PREFERIDO_REGULAR[i]);
+  // Precio del producto preferido a precio regular
+  precio_pref_producto_regular:
+  VALOR_PRECIO_PREFERIDO_REGULAR == sum(i in PRODUCTOS) (PRECIO_PREFERIDO_REGULAR[i]);
+  // Determinacion de los productos en promo que son preferidos por sobre el preferido a precio regular, y si su precio de venta es mayor
+  productos_en_promo_mejor_preferido_regular:
+  forall(i in PRODUCTOS) {
+
+     VALOR_PREF_PREFERIDO_REGULAR - PREF_PROMO_EN_PROMO[i] >= -M * (1 - Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i]);
+     VALOR_PREF_PREFERIDO_REGULAR - PREF_PROMO_EN_PROMO[i] <=  M * Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i];
+     PRECIO_PROMO_EN_PROMO[i] - VALOR_PRECIO_PREFERIDO_REGULAR >= -M * (1 - Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i]);
+     PRECIO_PROMO_EN_PROMO[i] - VALOR_PRECIO_PREFERIDO_REGULAR <=  M * Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i];
+  }    
+    
+  // AND para determinar si hay promocion o no (cumplen I y II), por producto
   hay_promo_producto_and:
   forall(i in PRODUCTOS) { 
    
-    Y_PREF_P_ANTES_R_RESTO[i] + Y_PRECIO_P_ANTES_R_RESTO[i] <= 1 + Y_HAY_PROMO_PROD[i];
-    Y_PREF_P_ANTES_R_RESTO[i] + Y_PRECIO_P_ANTES_R_RESTO[i] >= 2 * Y_HAY_PROMO_PROD[i]; 
+    Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i] + Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i] <= 1 + Y_HAY_PROMO_PROD[i];
+    Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i] + Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR[i] >= 2 * Y_HAY_PROMO_PROD[i]; 
   }
   
   // OR de lo anterior para determinar si hay promocion en general
@@ -143,12 +146,16 @@ subject to {
     sum(j in PRODUCTOS:i!=j) (Y_PREF_I_ANTES_J_DISPO[j][i]) >= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1) * Y_PREF_I_ANTES_J_RESTO[i];
     sum(j in PRODUCTOS:i!=j) (Y_PREF_I_ANTES_J_DISPO[j][i]) <= (sum(k in PRODUCTOS) (DISPONIBILIDAD[k]) - 1 - 1) + Y_PREF_I_ANTES_J_RESTO[i];
   }
+  // El resultado debe ser un solo producto
+  total_productos_preferidos_precio_regular:
+  sum(i in PRODUCTOS) (Y_PREF_I_ANTES_J_RESTO[i]) == 1;  
 
   // Vinculacion entre las variables de promocion y preferencia y las del funcional
   hay_promo_producto_final: 
   forall(i in PRODUCTOS) { 
   
-    Y_P[i] == Y_HAY_PROMO_PROD[i]; 
+    // Si hay promo, para los valores posibles (!=0), dejamos las variables libres y el funcional elegira la de mayor precio
+    Y_P[i] <= Y_HAY_PROMO_PROD[i]; 
   }  
   no_hay_promo_producto_final:
   forall(i in PRODUCTOS) { 
