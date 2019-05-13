@@ -1,0 +1,14 @@
+Tried aggregator 1 time.
+MIP Presolve eliminated 15756 rows and 10353 columns.
+MIP Presolve modified 282 coefficients.
+All rows and columns eliminated.
+Presolve time = 0,00 sec. (8,23 ticks)
+
+Root node processing (before b&c):
+  Real time             =    0,01 sec. (9,49 ticks)
+Parallel b&c, 4 threads:
+  Real time             =    0,00 sec. (0,00 ticks)
+  Sync time (average)   =    0,00 sec.
+  Wait time (average)   =    0,00 sec.
+                          ------------
+Total (root+branch&cut) =    0,01 sec. (9,49 ticks)

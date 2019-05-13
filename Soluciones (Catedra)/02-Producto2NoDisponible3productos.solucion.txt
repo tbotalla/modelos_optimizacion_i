@@ -1,0 +1,37 @@
+// solution (optimal) with objective 110
+// Quality Incumbent solution:
+// MILP objective                                 1,1000000000e+02
+// MILP solution norm |x| (Total, Max)            1,00044e+06  1,00000e+06
+// MILP solution error (Ax=b) (Total, Max)        0,00000e+00  0,00000e+00
+// MILP x bound error (Total, Max)                0,00000e+00  0,00000e+00
+// MILP x integrality error (Total, Max)          0,00000e+00  0,00000e+00
+// MILP slack bound error (Total, Max)            0,00000e+00  0,00000e+00
+// 
+
+Y_P = [0
+         0 1];
+Y_R = [0 0 0];
+Y_PREF_P_ANTES_R = [[0 1 1]
+             [1 0 1]
+             [1 1 0]];
+Y_PREF_P_ANTES_R_DISPO = [[0 0 1]
+             [0 0 0]
+             [1 0 0]];
+Y_PREF_P_ANTES_R_RESTO = [1 0 1];
+PREF_PREFERIDO_REGULAR = [5 0 0];
+Y_PREF_I_ANTES_J_RESTO = [1 0 0];
+PRECIO_PREFERIDO_REGULAR = [100 0 0];
+PREF_PROMO_EN_PROMO = [2 1000000 3];
+PRECIO_PROMO_EN_PROMO = [90 0 110];
+VALOR_PREF_PREFERIDO_REGULAR = 5;
+VALOR_PRECIO_PREFERIDO_REGULAR = 100;
+Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR = [1 0 1];
+Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR = [0 0 1];
+Y_HAY_PROMO_PROD = [0 0 1];
+Y_HAY_PROMO_GENE = 1;
+Y_PREF_I_ANTES_J = [[0 1 0]
+             [0 0 0]
+             [1 1 0]];
+Y_PREF_I_ANTES_J_DISPO = [[0 0 0]
+             [0 0 0]
+             [1 0 0]];

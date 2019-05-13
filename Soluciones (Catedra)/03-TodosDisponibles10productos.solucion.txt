@@ -1,0 +1,65 @@
+// solution (optimal) with objective 215
+// Quality Incumbent solution:
+// MILP objective                                 2,1500000000e+02
+// MILP solution norm |x| (Total, Max)            2,22400e+03  2,15000e+02
+// MILP solution error (Ax=b) (Total, Max)        0,00000e+00  0,00000e+00
+// MILP x bound error (Total, Max)                0,00000e+00  0,00000e+00
+// MILP x integrality error (Total, Max)          0,00000e+00  0,00000e+00
+// MILP slack bound error (Total, Max)            0,00000e+00  0,00000e+00
+// 
+
+Y_P = [0
+         0 0 0 0 0 0 0 0 1];
+Y_R = [0 0 0 0 0 0 0 0 0 0];
+Y_PREF_P_ANTES_R = [[0 1 1 1 1 1 1 1 1 1]
+             [1 0 1 1 1 1 1 1 1 1]
+             [1 1 0 1 1 1 1 1 1 1]
+             [1 1 1 0 1 1 1 1 1 1]
+             [1 1 1 1 0 1 1 1 1 1]
+             [1 1 1 1 1 0 1 1 1 1]
+             [1 1 1 1 1 1 0 1 1 1]
+             [1 1 1 1 1 1 1 0 1 1]
+             [1 1 1 1 1 1 1 1 0 1]
+             [1 1 1 1 1 1 1 1 1 0]];
+Y_PREF_P_ANTES_R_DISPO = [[0 1 1 1 1 1 1 1 1 1]
+             [1 0 1 1 1 1 1 1 1 1]
+             [1 1 0 1 1 1 1 1 1 1]
+             [1 1 1 0 1 1 1 1 1 1]
+             [1 1 1 1 0 1 1 1 1 1]
+             [1 1 1 1 1 0 1 1 1 1]
+             [1 1 1 1 1 1 0 1 1 1]
+             [1 1 1 1 1 1 1 0 1 1]
+             [1 1 1 1 1 1 1 1 0 1]
+             [1 1 1 1 1 1 1 1 1 0]];
+Y_PREF_P_ANTES_R_RESTO = [1 1 1 1 1 1 1 1 1 1];
+PREF_PREFERIDO_REGULAR = [0 11 0 0 0 0 0 0 0 0];
+Y_PREF_I_ANTES_J_RESTO = [0 1 0 0 0 0 0 0 0 0];
+PRECIO_PREFERIDO_REGULAR = [0 120 0 0 0 0 0 0 0 0];
+PREF_PROMO_EN_PROMO = [2 1 3 4 5 6 7 8 9 10];
+PRECIO_PROMO_EN_PROMO = [90 105 110 155 165 175 185 195 205 215];
+VALOR_PREF_PREFERIDO_REGULAR = 11;
+VALOR_PRECIO_PREFERIDO_REGULAR = 120;
+Y_PREF_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR = [1 1 1 1 1 1 1 1 1 1];
+Y_PRECIO_POSIBLES_PROMO_MEJOR_PREFERIDO_REGULAR = [0 0 0 1 1 1 1 1 1 1];
+Y_HAY_PROMO_PROD = [0 0 0 1 1 1 1 1 1 1];
+Y_HAY_PROMO_GENE = 1;
+Y_PREF_I_ANTES_J = [[0 1 0 0 0 0 0 0 0 0]
+             [0 0 0 0 0 0 0 0 0 0]
+             [1 1 0 0 0 0 0 0 0 0]
+             [1 1 1 0 0 0 0 0 0 0]
+             [1 1 1 1 0 0 0 0 0 0]
+             [1 1 1 1 1 0 0 0 0 0]
+             [1 1 1 1 1 1 0 0 0 0]
+             [1 1 1 1 1 1 1 0 0 0]
+             [1 1 1 1 1 1 1 1 0 0]
+             [1 1 1 1 1 1 1 1 1 0]];
+Y_PREF_I_ANTES_J_DISPO = [[0 1 0 0 0 0 0 0 0 0]
+             [0 0 0 0 0 0 0 0 0 0]
+             [1 1 0 0 0 0 0 0 0 0]
+             [1 1 1 0 0 0 0 0 0 0]
+             [1 1 1 1 0 0 0 0 0 0]
+             [1 1 1 1 1 0 0 0 0 0]
+             [1 1 1 1 1 1 0 0 0 0]
+             [1 1 1 1 1 1 1 0 0 0]
+             [1 1 1 1 1 1 1 1 0 0]
+             [1 1 1 1 1 1 1 1 1 0]];
